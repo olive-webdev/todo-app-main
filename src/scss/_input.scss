@@ -1,0 +1,30 @@
+form {
+    position: relative;
+    margin-bottom: 1.5rem;
+
+    & input {
+      font-family: "Josefin Sans", sans-serif;
+      font-weight: 400;
+      font-size: 1.2rem;
+      border-radius: 0.3rem;
+      width: 100%;
+      border: none;
+      padding: 1.5rem 1rem 1.3rem 4.5rem;
+      color: #999;
+      &:focus{
+        outline: none;
+        & + label{
+            border: 1px solid #333;
+        }
+      }
+    }
+    & label {
+      content: "";
+      position: absolute;
+      height: 1.4rem;
+      width: 1.4rem;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      inset: 1.2rem 1.2rem;
+    }
+  }
