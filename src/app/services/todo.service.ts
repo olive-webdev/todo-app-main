@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { Todo } from '../interfaces/todo'
 import { BehaviorSubject, Observable, map } from 'rxjs'
 import { NgForm } from '@angular/forms'
@@ -7,43 +7,42 @@ import { NgForm } from '@angular/forms'
   providedIn: 'root'
 })
 export class TodoService{
+  mockup: Todo[] = [
+    {
+      id: 2,
+      title: "Use Angular",
+      status: "completed"
+    },
+    {
+      id: 4,
+      title: "Add toggle Active/Completed feature",
+      status: "completed"
+    },
+    {
+      id: 3,
+      title: "Add Drag&Drop possibility",
+      status: "completed"
+    },
+    {
+      id: 5,
+      title: "Complete Todo App on Frontend Mentor",
+      status: "completed"
+    },
+    {
+      id: 0,
+      title: "Think about next project",
+      status: "active"
+    },
+    {
+      id: 1,
+      title: "Pet the cat",
+      status: "active"
+    },
+  ]
 
   constructor() {}
 
-  list: BehaviorSubject<Todo[]> = new BehaviorSubject(
-    [
-      {
-        id: 0,
-        title: "Complete online Javascript course",
-        status: "completed"
-      },
-      {
-        id: 1,
-        title: "Jog around the park 3x",
-        status: "active"
-      },
-      {
-        id: 2,
-        title: "10 minutes meditation",
-        status: "active"
-      },
-      {
-        id: 3,
-        title: "read for 1 hour",
-        status: "active"
-      },
-      {
-        id: 4,
-        title: "Pick up groceries",
-        status: "active"
-      },
-      {
-        id: 5,
-        title: "Complete Todo App on Frontend Mentor",
-        status: "active"
-      }
-    ]
-  )
+  list: BehaviorSubject<Todo[]> = new BehaviorSubject(this.mockup)
 
   active: Observable<number> = this.list.pipe(
     map(value => value.filter(value => value.status === "active").length)
@@ -52,7 +51,6 @@ export class TodoService{
   completed: Observable<number> = this.list.pipe(
     map(value => value.filter(value => value.status === "completed").length)
   )
-
 
   changeStatus(item: Todo) {
     let newTodo: Todo[] = []
@@ -69,28 +67,22 @@ export class TodoService{
   }
 
   createTodo(item: NgForm): Todo[] {
-    let id = new Date().valueOf()
-    console.log([...this.list.value, {
-      id: id,
-      title: item.value.todo,
-      status: "active"
-    }])
     return [...this.list.value, {
-      id: id,
+      id: new Date().valueOf(),
       title: item.value.todo,
       status: "active"
     }]
   }
 
-  deleteCompletedTodo(): Todo[] {
-    return this.list.value.filter(
-      item=> item.status !== "completed"
-    )
-  }
-
   deleteTodo(todo: Todo): Todo[]{
     return this.list.value.filter(
       item => item.id !== todo.id
+    )
+  }
+
+  deleteCompletedTodos(): Todo[] {
+    return this.list.value.filter(
+      item=> item.status !== "completed"
     )
   }
 }

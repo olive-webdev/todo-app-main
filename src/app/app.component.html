@@ -1,6 +1,9 @@
 <main>
   <div id="container">
-    <h1>TODO</h1>
+    <header>
+      <h1>TODO</h1>
+      <button [class]="theme === 'light' ? 'moon' : 'sun'" (click)="toggleTheme()"></button>
+    </header>
 
     <form #todo="ngForm" (ngSubmit)="submit(todo)">
       <input
@@ -55,6 +58,7 @@
         <button (click)="clearCompleted()">Clear Completed</button>
       </div>
     </div>
+    <span>Drag and drop to reorder list</span>
   </div>
 </main>
 

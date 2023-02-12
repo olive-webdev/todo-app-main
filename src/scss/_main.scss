@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+}
+body, h1{
+  margin: 0;
+}
+
+body {
+  font-family: "Josefin Sans", sans-serif;
+  background-color: var(--bgcBody);
+  color: var(--verydarkblue);
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+
+main {
+  background-image: var(--bgImage);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center top;
+  height: 100vh;
+  padding-top: 5rem;
+  & header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    & button{
+      height: 1.6rem;
+      width: 1.6rem;
+      background-position: center;
+      background-image: var(--bgButton);
+    }
+  }
+}
+
+#container {
+  max-width: 35.75rem;
+  padding-inline: 1rem;
+  margin: auto;
+  & h1 {
+    color: #fff;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 1rem;
+  }
+  & > span{
+    text-align: center;
+    display: block;
+    padding-top: 4rem;
+  }
+}
+
+.attribution {
+  padding: 1rem;
+  font-size: 16px;
+  text-align: center;
+}

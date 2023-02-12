@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Todo } from './interfaces/todo'
 import { TodoService } from './services/todo.service'
 import { BehaviorSubject, Observable } from 'rxjs'
@@ -11,18 +11,11 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   todoList: BehaviorSubject<Todo[]> = this.todo.list
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi'
-  ];
+
+  theme: "light" | "dark" = "light"
+
   active: Observable<number> = this.todo.active
 
   completed: Observable<number> = this.todo.completed
@@ -31,20 +24,29 @@ export class AppComponent {
 
   constructor(private todo: TodoService) { }
 
-  toggleStatus(item: Todo):void {
+  ngOnInit(): void {
+    document.body.classList.add(this.theme)
+  }
+  toggleTheme() {
+    document.body.classList.remove(this.theme)
+    this.theme = this.theme === "light" ? "dark" : "light"
+    document.body.classList.add(this.theme)
+  }
+
+  toggleStatus(item: Todo): void {
     this.todo.list.next(this.todo.changeStatus(item))
   }
 
-  submit(todo: NgForm):void {
+  submit(todo: NgForm): void {
     this.todo.list.next(this.todo.createTodo(todo))
     todo.reset()
   }
 
-  clearCompleted():void {
-    this.todo.list.next(this.todo.deleteCompletedTodo())
+  clearCompleted(): void {
+    this.todo.list.next(this.todo.deleteCompletedTodos())
   }
 
-  deleteTodo(item: Todo):void {
+  deleteTodo(item: Todo): void {
     this.todo.list.next(this.todo.deleteTodo(item))
   }
 
