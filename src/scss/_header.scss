@@ -13,7 +13,7 @@ header {
     background-image: var(--bgButton);
     background-repeat: no-repeat;
     border-radius: .3rem;
-    &:focus-within {
+    &:focus-visible {
       outline: 2px solid #fff;
       outline-offset: -2px;
     }

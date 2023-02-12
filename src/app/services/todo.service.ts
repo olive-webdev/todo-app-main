@@ -39,7 +39,7 @@ export class TodoService{
       status: "active"
     },
   ]
-
+  
   constructor() {}
 
   list: BehaviorSubject<Todo[]> = new BehaviorSubject(this.mockup)
@@ -67,11 +67,13 @@ export class TodoService{
   }
 
   createTodo(item: NgForm): Todo[] {
-    return [...this.list.value, {
+    let todoList: Todo[] = [...this.list.value, {
       id: new Date().valueOf(),
       title: item.value.todo,
       status: "active"
     }]
+    item.reset()
+    return todoList
   }
 
   deleteTodo(todo: Todo): Todo[]{

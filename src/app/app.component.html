@@ -27,7 +27,7 @@
       <button
         (click)="toggleStatus(item)"
         *ngFor="let item of todoList | async | filter : filter"
-        [class]="'todo-list-item ' + item.status"
+        [class]="'todo-list-item ' + item.status + (mobile ? ' mobile' : '')"
         cdkDrag
       >
         <span>
@@ -36,30 +36,35 @@
         </span>
       </button>
 
-      <div class="todo-list-menu">
-        <span *ngIf="filter === 'all'"
+      <footer class="todo-list-menu" [ngSwitch]="filter">
+        <span *ngSwitchCase="'all'"
           >{{ active | async }} item{{
             (active | async)! > 1 ? "s" : ""
           }}
           left</span
         >
-        <span *ngIf="filter === 'active'"
+        <span *ngSwitchCase="'active'"
           >{{ active | async }} item{{
             (active | async)! > 1 ? "s" : ""
           }}
           active{{ (active | async)! > 1 ? "s" : "" }}</span
         >
-        <span *ngIf="filter === 'completed'"
+        <span *ngSwitchCase="'completed'"
           >{{ completed | async }} item{{
             (completed | async)! > 1 ? "s" : ""
           }}
           completed</span
         >
-        <button (click)="filter = 'all'">All</button>
-        <button (click)="filter = 'active'">Active</button>
-        <button (click)="filter = 'completed'">Completed</button>
+        <button
+          *ngFor="let filterItem of filterList"
+          (click)="filter = filterItem"
+          [class]="filter === filterItem ? 'active' : ''"
+        >
+          {{ filterItem | titlecase }}
+        </button>
+
         <button (click)="clearCompleted()">Clear Completed</button>
-      </div>
+      </footer>
     </div>
     <span>Drag and drop to reorder list</span>
   </div>

@@ -4,6 +4,7 @@ import { TodoService } from './services/todo.service'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { NgForm } from '@angular/forms'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
+import { UiService } from './services/ui.service'
 
 
 @Component({
@@ -14,23 +15,26 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 export class AppComponent implements OnInit {
   todoList: BehaviorSubject<Todo[]> = this.todo.list
 
-  theme: "light" | "dark" = "light"
+  theme!: "light" | "dark"
+  mobile!: boolean
 
   active: Observable<number> = this.todo.active
 
   completed: Observable<number> = this.todo.completed
 
   filter = "all"
+  filterList = ["all", "active", "completed"]
 
-  constructor(private todo: TodoService) { }
+  constructor(
+    private todo: TodoService,
+    private ui: UiService) { }
 
   ngOnInit(): void {
-    document.body.classList.add(this.theme)
+    this.theme = this.ui.setTheme()
+    this.mobile = this.ui.isMobile()
   }
   toggleTheme() {
-    document.body.classList.remove(this.theme)
-    this.theme = this.theme === "light" ? "dark" : "light"
-    document.body.classList.add(this.theme)
+    this.theme = this.ui.toggleTheme(this.theme)
   }
 
   toggleStatus(item: Todo): void {
@@ -39,7 +43,6 @@ export class AppComponent implements OnInit {
 
   submit(todo: NgForm): void {
     this.todo.list.next(this.todo.createTodo(todo))
-    todo.reset()
   }
 
   clearCompleted(): void {

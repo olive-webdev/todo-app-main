@@ -6,7 +6,7 @@
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 19px 38px, rgba(0, 0, 0, 0.1) 0px 15px 12px;
   &-item {
-    background-color: #fff;
+    background-color: var(--bgc-todo);
     padding: 1.5rem 1rem 1.3rem 4.5rem;
     position: relative;
     border-bottom: 1px solid #eee;
@@ -17,7 +17,6 @@
       }
     & span{
       display: flex;
-
       position: relative;
       & > button{
         position: absolute;
@@ -34,7 +33,7 @@
         }
       }
     }
-    &:hover, &:focus-within{
+    &:hover, &:focus-within, &.mobile{
       & button{
         display: block;
       }
@@ -81,6 +80,7 @@
     border-bottom: 1px solid #eee;
     font-size: 1.1rem;
     display: flex;
+    gap: 1rem;
     align-items: center;
     & span {
       margin-right: auto;
@@ -88,6 +88,9 @@
     & button:last-of-type {
       margin-left: auto;
       width: fit-content;
+    }
+    & .active{
+      color: hsl(220, 60%, 60%)
     }
   }
 }

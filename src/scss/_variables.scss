@@ -1,8 +1,12 @@
 body {
   &.light {
-    --bgcBody: var(--VeryLightGray);
+    --bgcBody: var(--VeryLightGrayishBlue);
     --textColor: var(--DarkGrayishBlue);
+    --bgc-input: var(--VeryLightGray);
+    --bgc-todo: var(--VeryLightGray);
     
+    --bgImage: url(/assets/images/bg-desktop-light.jpg);
+    --bgButton: url(../assets/images/icon-moon.svg);
 
 
     --verydarkblue: hsl(235, 21%, 11%);
@@ -11,11 +15,14 @@ body {
     --LightGrayishBlue: hsl(233, 11%, 84%);
     --DarkGrayishBlue: hsl(236, 9%, 61%);
     --VeryDarkGrayishBlue: hsl(235, 19%, 35%);
-    --bgImage: url(/assets/images/bg-desktop-light.jpg);
-    --bgButton: url(../assets/images/icon-moon.svg);
   }
   &.dark {
-    --bgcBody: hsl(237, 14%, 26%);
+    --bgcBody: var(--verydarkblue);
+    --textColor: var(--LightGrayishBlue);
+
+    --bgImage: url(/assets/images/bg-desktop-dark.jpg);
+    --bgButton: url(../assets/images/icon-sun.svg);
+
     --verydarkblue: hsl(235, 21%, 11%);
     --VeryDarkDesaturatedBlue: hsl(235, 24%, 19%);
     --LightGrayishBlue: hsl(234, 39%, 85%);
@@ -23,7 +30,5 @@ body {
     --DarkGrayishBlue: hsl(234, 11%, 52%);
     --VeryDarkGrayishBlue: hsl(233, 14%, 35%);
     --VeryDarkGrayishBlue: hsl(237, 14%, 26%);
-    --bgImage: url(/assets/images/bg-desktop-dark.jpg);
-    --bgButton: url(../assets/images/icon-sun.svg);
   }
 }
