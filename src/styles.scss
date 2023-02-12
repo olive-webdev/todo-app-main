@@ -71,6 +71,20 @@ main {
     border-bottom: 1px solid #eee;
     font-size: 1.1rem;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    & button{
+      display: none;
+      background-image: url(assets/images/icon-cross.svg);
+      background-position: center;
+      width: 16px;height: 16px;
+      border: none;
+    }
+    &:hover{
+      & button{
+        display: block;
+      }
+    }
     &.active::before{
         content: "";
         position: absolute;

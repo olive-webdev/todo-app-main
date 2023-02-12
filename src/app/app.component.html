@@ -1,27 +1,50 @@
 <main>
   <div id="container">
     <h1>TODO</h1>
-    <div class="square"></div>
-    <form>
-      <input type="text" id="todoInput" placeholder="Create a new todo..." />
+
+    <form #todo="ngForm" (ngSubmit)="submit(todo)">
+      <input
+        type="text"
+        id="todoInput"
+        name="todo"
+        placeholder="Create a new todo..."
+        ngModel
+      />
       <label for="todoInput"></label>
     </form>
+
     <div *ngIf="todoList" class="todo-list">
       <span
-      (click)="toggleStatus(item)"
-        *ngFor="let item of todoList | async | filter: filter"
+        (click)="toggleStatus(item)"
+        *ngFor="let item of todoList | async | filter : filter"
         [class]="'todo-list-item ' + item.status"
-        >
+      >
         {{ item.title }}
-        </span>
+        <button (click)="deleteTodo(item)"></button>
+      </span>
       <div class="todo-list-menu">
-        <span *ngIf="filter==='all'">{{ active |async }} items left</span>
-        <span *ngIf="filter==='active'">{{ active |async }} items actives</span>
-        <span *ngIf="filter==='completed'">{{ completed |async }} items completed</span>
+        <span *ngIf="filter === 'all'"
+          >{{ active | async }} item{{
+            (active | async)! > 1 ? "s" : ""
+          }}
+          left</span
+        >
+        <span *ngIf="filter === 'active'"
+          >{{ active | async }} item{{
+            (active | async)! > 1 ? "s" : ""
+          }}
+          active{{ (active | async)! > 1 ? "s" : "" }}</span
+        >
+        <span *ngIf="filter === 'completed'"
+          >{{ completed | async }} item{{
+            (completed | async)! > 1 ? "s" : ""
+          }}
+          completed</span
+        >
         <button (click)="filter = 'all'">All</button>
         <button (click)="filter = 'active'">Active</button>
         <button (click)="filter = 'completed'">Completed</button>
-        <button>Clear Completed</button>
+        <button (click)="clearCompleted()">Clear Completed</button>
       </div>
     </div>
   </div>

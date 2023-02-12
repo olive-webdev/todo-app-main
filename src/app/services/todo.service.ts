@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core'
 import { Todo } from '../interfaces/todo'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Observable, map } from 'rxjs'
+import { NgForm } from '@angular/forms'
 
 @Injectable({
   providedIn: 'root'
@@ -43,4 +44,53 @@ export class TodoService{
       }
     ]
   )
+
+  active: Observable<number> = this.list.pipe(
+    map(value => value.filter(value => value.status === "active").length)
+  )
+
+  completed: Observable<number> = this.list.pipe(
+    map(value => value.filter(value => value.status === "completed").length)
+  )
+
+
+  changeStatus(item: Todo) {
+    let newTodo: Todo[] = []
+    this.list.value.map(
+      todo => {
+        if (todo.id === item.id) {
+          item.status === "active" ? todo.status = "completed" : todo.status = "active"
+          newTodo.push(todo)
+        }
+        else newTodo.push(todo)
+      }
+    )
+    return newTodo
+  }
+
+  createTodo(item: NgForm): Todo[] {
+    let id = new Date().valueOf()
+    console.log([...this.list.value, {
+      id: id,
+      title: item.value.todo,
+      status: "active"
+    }])
+    return [...this.list.value, {
+      id: id,
+      title: item.value.todo,
+      status: "active"
+    }]
+  }
+
+  deleteCompletedTodo(): Todo[] {
+    return this.list.value.filter(
+      item=> item.status !== "completed"
+    )
+  }
+
+  deleteTodo(todo: Todo): Todo[]{
+    return this.list.value.filter(
+      item => item.id !== todo.id
+    )
+  }
 }

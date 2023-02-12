@@ -1,46 +1,40 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { Todo } from './interfaces/todo'
 import { TodoService } from './services/todo.service'
-import { filter, map, tap } from 'rxjs/operators'
 import { BehaviorSubject, Observable } from 'rxjs'
+import { NgForm } from '@angular/forms'
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   todoList: BehaviorSubject<Todo[]> = this.todo.list
 
-  active: Observable<number> = this.todo.list.pipe(
-    map(value => value.filter(value => value.status === "active").length)
-  )
+  active: Observable<number> = this.todo.active
 
-  completed: Observable<number> = this.todo.list.pipe(
-    map(value => value.filter(value => value.status === "completed").length)
-  )
-
+  completed: Observable<number> = this.todo.completed
 
   filter = "all"
-  
+
   constructor(private todo: TodoService) { }
-  
-  ngOnInit(): void {
-    
+
+  toggleStatus(item: Todo):void {
+    this.todo.list.next(this.todo.changeStatus(item))
   }
 
+  submit(todo: NgForm):void {
+    this.todo.list.next(this.todo.createTodo(todo))
+    todo.reset()
+  }
 
-  toggleStatus(item: Todo) {
-    let newTodo: Todo[] =[]
-    this.todo.list.value.map(
-      todo => {
-        if (todo.id === item.id) {
-          item.status === "active" ? todo.status = "completed" : todo.status = "active"
-          newTodo.push(todo)
-        }
-        else newTodo.push(todo)
-      }
-    )
-    this.todo.list.next(newTodo)
+  clearCompleted():void {
+    this.todo.list.next(this.todo.deleteCompletedTodo())
+  }
+
+  deleteTodo(item: Todo):void {
+    this.todo.list.next(this.todo.deleteTodo(item))
   }
 }
