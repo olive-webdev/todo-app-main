@@ -11,15 +11,12 @@ form {
       border: none;
       padding: 1.5rem 1rem 1.3rem 4.5rem;
       color: #999;
-      &:focus{
-        outline: none;
-        & + label{
-            border: 1px solid #333;
-        }
+      &:focus-within{
+        outline: 2px solid var(--DarkGrayishBlue);
+        outline-offset: -2px;
       }
     }
     & label {
-      content: "";
       position: absolute;
       height: 1.4rem;
       width: 1.4rem;

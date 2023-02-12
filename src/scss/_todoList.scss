@@ -11,21 +11,35 @@
     position: relative;
     border-bottom: 1px solid #eee;
     font-size: 1.1rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    & button{
-      display: none;
-      background-image: url(../assets/images/icon-cross.svg);
-      background-position: center;
-      width: 16px;height: 16px;
-      border: none;
+    &:focus-visible{
+        outline: 2px solid var(--DarkGrayishBlue);
+        outline-offset: -2px;
+      }
+    & span{
+      display: flex;
+
+      position: relative;
+      & > button{
+        position: absolute;
+        top: -.3rem;
+        right: 0rem;
+        display: none;
+        background-image: url(../assets/images/icon-cross.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 2rem;height: 2rem;
+        &:focus-within{
+          outline: 2px solid var(--DarkGrayishBlue);
+          outline-offset: -2px;
+        }
+      }
     }
-    &:hover{
+    &:hover, &:focus-within{
       & button{
         display: block;
       }
     }
+    
     &.active::before{
         content: "";
         position: absolute;

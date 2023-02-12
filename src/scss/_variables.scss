@@ -1,6 +1,10 @@
 body {
   &.light {
-    --bgcBody: hsl(0, 0%, 98%);
+    --bgcBody: var(--VeryLightGray);
+    --textColor: var(--DarkGrayishBlue);
+    
+
+
     --verydarkblue: hsl(235, 21%, 11%);
     --VeryLightGray: hsl(0, 0%, 98%);
     --VeryLightGrayishBlue: hsl(236, 33%, 92%);

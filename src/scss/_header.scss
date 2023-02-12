@@ -1,0 +1,28 @@
+header {
+  max-width: 35.75rem;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  & button {
+    padding: 1rem;
+    height: calc(2rem + 26px);
+    width: calc(2rem + 26px);
+    background-position: center;
+    background-image: var(--bgButton);
+    background-repeat: no-repeat;
+    border-radius: .3rem;
+    &:focus-within {
+      outline: 2px solid #fff;
+      outline-offset: -2px;
+    }
+  }
+  & h1 {
+    padding: 1rem;
+    color: #fff;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 1rem;
+  }
+}

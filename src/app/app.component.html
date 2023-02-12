@@ -1,10 +1,12 @@
 <main>
+  <header>
+    <h1>TODO</h1>
+    <button
+      [class]="theme === 'light' ? 'moon' : 'sun'"
+      (click)="toggleTheme()"
+    ></button>
+  </header>
   <div id="container">
-    <header>
-      <h1>TODO</h1>
-      <button [class]="theme === 'light' ? 'moon' : 'sun'" (click)="toggleTheme()"></button>
-    </header>
-
     <form #todo="ngForm" (ngSubmit)="submit(todo)">
       <input
         type="text"
@@ -16,23 +18,24 @@
       <label for="todoInput"></label>
     </form>
 
-    <div cdkDropList *ngIf="todoList" class="todo-list" (cdkDropListDropped)="drop($event)">
-      <span
+    <div
+      cdkDropList
+      *ngIf="todoList"
+      class="todo-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <button
         (click)="toggleStatus(item)"
         *ngFor="let item of todoList | async | filter : filter"
         [class]="'todo-list-item ' + item.status"
         cdkDrag
       >
-        {{ item.title }}
-        <button (click)="deleteTodo(item)"></button>
-      </span>
-      <!-- <span
-        *ngFor="let item of movies"
-        [class]="'todo-list-item '"
-        cdkDrag
-      >
-        {{ item }}
-      </span> -->
+        <span>
+          {{ item.title }}
+          <button (click)="deleteTodo(item)"></button>
+        </span>
+      </button>
+
       <div class="todo-list-menu">
         <span *ngIf="filter === 'all'"
           >{{ active | async }} item{{

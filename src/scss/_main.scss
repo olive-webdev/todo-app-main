@@ -1,7 +1,8 @@
 * {
   box-sizing: border-box;
 }
-body, h1{
+body,
+h1 {
   margin: 0;
 }
 
@@ -15,8 +16,8 @@ button {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  padding: 0;
 }
-
 
 main {
   background-image: var(--bgImage);
@@ -25,31 +26,13 @@ main {
   background-position: center top;
   height: 100vh;
   padding-top: 5rem;
-  & header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2.5rem;
-    & button{
-      height: 1.6rem;
-      width: 1.6rem;
-      background-position: center;
-      background-image: var(--bgButton);
-    }
-  }
 }
 
 #container {
   max-width: 35.75rem;
   padding-inline: 1rem;
   margin: auto;
-  & h1 {
-    color: #fff;
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: 1rem;
-  }
-  & > span{
+  & > span {
     text-align: center;
     display: block;
     padding-top: 4rem;
