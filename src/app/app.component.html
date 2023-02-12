@@ -13,15 +13,23 @@
       <label for="todoInput"></label>
     </form>
 
-    <div *ngIf="todoList" class="todo-list">
+    <div cdkDropList *ngIf="todoList" class="todo-list" (cdkDropListDropped)="drop($event)">
       <span
         (click)="toggleStatus(item)"
         *ngFor="let item of todoList | async | filter : filter"
         [class]="'todo-list-item ' + item.status"
+        cdkDrag
       >
         {{ item.title }}
         <button (click)="deleteTodo(item)"></button>
       </span>
+      <!-- <span
+        *ngFor="let item of movies"
+        [class]="'todo-list-item '"
+        cdkDrag
+      >
+        {{ item }}
+      </span> -->
       <div class="todo-list-menu">
         <span *ngIf="filter === 'all'"
           >{{ active | async }} item{{

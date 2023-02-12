@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'
-
+import { DragDropModule } from '@angular/cdk/drag-drop'
 import { AppComponent } from './app.component'
 import { FilterPipe } from './pipes/filter.pipe';
 
@@ -12,7 +12,8 @@ import { FilterPipe } from './pipes/filter.pipe';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]
